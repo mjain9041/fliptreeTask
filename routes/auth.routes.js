@@ -84,6 +84,7 @@ authRoute.route("/register").post(async (req, res) => {
     type: 'Point',
     coordinates: [req.body.long, req.body.lat]
   }
+  userDetail.isRegister = true
   let userDetail = await User.findOneAndUpdate({_id: req.body.id}, req.body)
   var token = jwt.sign({ id: userId, email: userDetail.email  }, process.env.JWT_SECRET_KEY);
   res.json({message: 'User Registered', data: {userDetail, token} })
